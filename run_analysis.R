@@ -2,20 +2,20 @@ library(plyr)
 
 # Step - 1
 # Merging the training and test datasets into a single dataset
-merge_x <- function()
+merge_features <- function()
 {
     trainX <- read.table("train/X_train.txt")
     testX <- read.table("test/X_test.txt")
-    dataX <- rbind(trainX, testX)
-    dataX
+    features <- rbind(trainX, testX)
+    features
 }
 
-merge_y <- function()
+merge_labels <- function()
 {
     trainY <- read.table("train/y_train.txt")
     testY <- read.table("test/y_test.txt")
-    dataY <- rbind(trainY, testY)
-    dataY
+    labels <- rbind(trainY, testY)
+    labels
 }
 
 merge_subject <- function()
@@ -28,31 +28,31 @@ merge_subject <- function()
 
 # Step - 2
 # Extracting measurements on mean and std
-extract_measurements <- function(dataX)
+extract_measurements <- function(features)
 {
     features <- read.table("features.txt")
     mean_and_std <- grep("-(std|mean)\\(\\)", features[, 2])
-    dataX <- dataX[, mean_and_std]
-    names(dataX) <- features[mean_and_std, 2]
+    features <- features[, mean_and_std]
+    names(features) <- features[mean_and_std, 2]
 }
 
 # Step - 3
 # Changing names to descriptive activity names to name activities in the dataset
 
-edit_names <- function(dataY)
+edit_names <- function(labels)
 {
     activities <- read.table("activity_labels.txt")
-    dataY[, 1] <- activities[dataY[, 1], 2]
-    names(dataY) <- "activity"
+    labels[, 1] <- activities[labels[, 1], 2]
+    names(labels) <- "activity"
 }
 
 # Step - 4
 # Labeling dataset with descriptive variable names
 
-labeling <- function(subject_data, dataX, dataY)
+labeling <- function(subject_data, features, labels)
 {
     names(subject_data) <- "subject"
-    all_data <- cbind(dataX, dataY, subject_data)
+    all_data <- cbind(features, labels, subject_data)
     all_data
 }
 
@@ -75,18 +75,18 @@ load_to_disk <- function(alldata)
 ###############################################################################
 
 # Merges the training and the test sets to create one data set.
-dataX <- merge_x()
-dataY <- merge_y()
+features <- merge_features()
+labels <- merge_labels()
 subject_data <- merge_subject()
 
 # Extracts only the measurements on the mean and standard deviation for each measurement.
-extract_measurements(dataX)
+extract_measurements(features)
 
 # Uses descriptive activity names to name the activities in the data set
-edit_names(dataY)
+edit_names(labels)
 
 # Appropriately labels the data set with descriptive variable names.
-all_data <- labeling(subject_data = subject_data, dataX = dataX, dataY = dataY)
+all_data <- labeling(subject_data = subject_data, features = features, labels = labels)
 
 # Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 load_to_disk(all_data)
