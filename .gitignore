@@ -2,5 +2,5 @@ test/*
 train/*
 activity_labels.txt
 features.txt
-feature_info.txt
+features_info.txt
 README.txt

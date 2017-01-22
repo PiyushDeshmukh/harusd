@@ -59,9 +59,8 @@ labeling <- function(subject_data, features, labels)
 # Step - 5
 # Creating independent tidy data set
 
-load_to_disk <- function(alldata)
+load_to_disk <- function(alldata, filename = 'tidy_ds.txt')
 {
-    filename = 'tidy_ds.txt'
     if (file.exists(filename))
     {
         file.remove(filename)
