@@ -9,7 +9,7 @@ The [Dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI
 
 The following steps were performed while working on this project:
 
- - The [dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) is downloaded. The directory structure is
+ - The [dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) is downloaded.
 
  - Transformations as explained in `CodeBook.md` are applied using the script `run_analysis.R`. See the codebook for details.
  
